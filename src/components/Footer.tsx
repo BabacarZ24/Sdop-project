@@ -1,6 +1,10 @@
 import { Search, Instagram, Linkedin } from "lucide-react";
 
-export default function Footer() {
+interface FooterProps {
+  onShowPrivacy?: () => void;
+}
+
+export default function Footer({ onShowPrivacy }: FooterProps) {
   return (
     <footer className="bg-white border-t border-slate-100 pt-20 pb-10 px-6">
       <div className="max-w-7xl mx-auto">
@@ -28,6 +32,14 @@ export default function Footer() {
               <li><a href="#a-propos" className="hover:text-primary transition-colors">A-propos</a></li>
               <li><a href="#services" className="hover:text-primary transition-colors">Services</a></li>
               <li><a href="#contact" className="hover:text-primary transition-colors">Contact</a></li>
+              <li>
+                <button 
+                  onClick={onShowPrivacy}
+                  className="hover:text-primary transition-colors text-left"
+                >
+                  Politique de Confidentialité
+                </button>
+              </li>
             </ul>
           </div>
 

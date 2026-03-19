@@ -2,10 +2,26 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MessageCircle, X, Send, Bot } from "lucide-react";
 
+function TypewriterText({ text, speed = 20 }: { text: string; speed?: number }) {
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    let i = 0;
+    const timer = setInterval(() => {
+      setDisplayedText(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(timer);
+    }, speed);
+    return () => clearInterval(timer);
+  }, [text, speed]);
+
+  return <span>{displayedText}</span>;
+}
+
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "bot", content: "Bonjour ! Je suis l'assistant IA de SDOP. Comment puis-je vous aider aujourd'hui ?" }
+    { id: Date.now(), role: "bot", content: "Bonjour ! Je suis l'assistant IA de SDOP. Comment puis-je vous aider aujourd'hui ?" }
   ]);
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -19,13 +35,14 @@ export default function Chatbot() {
   const handleSend = async () => {
     if (!input.trim()) return;
 
-    const userMessage = { role: "user", content: input };
+    const userMessage = { id: Date.now(), role: "user", content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput("");
 
     // Placeholder for AI integration
     setTimeout(() => {
       setMessages(prev => [...prev, { 
+        id: Date.now() + 1,
         role: "bot", 
         content: "Ceci est une réponse automatique. L'intégration complète avec l'API Gemini est prête à être configurée." 
       }]);
@@ -60,14 +77,18 @@ export default function Chatbot() {
 
             {/* Messages */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
-              {messages.map((msg, i) => (
-                <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+              {messages.map((msg) => (
+                <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
                     msg.role === "user" 
                       ? "bg-primary text-white rounded-tr-none" 
                       : "bg-white text-slate-700 shadow-sm rounded-tl-none"
                   }`}>
-                    {msg.content}
+                    {msg.role === "bot" ? (
+                      <TypewriterText text={msg.content} />
+                    ) : (
+                      msg.content
+                    )}
                   </div>
                 </div>
               ))}

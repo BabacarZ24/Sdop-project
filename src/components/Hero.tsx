@@ -39,7 +39,7 @@ export default function Hero() {
         >
           <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-50">
             <img
-              src="https://picsum.photos/seed/sdop-hero/1200/675"
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200&h=800"
               alt="SDOP Platform Preview"
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
