@@ -13,7 +13,14 @@ export default function About() {
     const fetchImage1 = async () => {
       setLoading1(true);
       try {
-        const prompt = "A futuristic and clean 3D render of an AI-powered lost and found platform. A central smartphone displays a 'Matching' screen with holographic icons of a wallet, keys, and a phone being connected by glowing data lines. The background is a dark, sophisticated blue with abstract digital patterns. High-tech, professional, and trustworthy aesthetic.";
+        const variations = [
+          "futuristic 3D render",
+          "clean minimalist tech aesthetic",
+          "high-tech holographic interface",
+          "sophisticated digital ecosystem"
+        ];
+        const randomVariation = variations[Math.floor(Math.random() * variations.length)];
+        const prompt = `A ${randomVariation} of an AI-powered lost and found platform. A central smartphone displays a 'Matching' screen with holographic icons of a wallet, keys, and a phone being connected by glowing data lines. The background is a dark, sophisticated blue with abstract digital patterns. High-tech, professional, and trustworthy aesthetic. Seed: ${Math.random()}`;
         const img = await generateImage(prompt);
         setAiImage1(img);
       } catch (error) {
@@ -27,7 +34,14 @@ export default function About() {
     const fetchImage2 = async () => {
       setLoading2(true);
       try {
-        const prompt = "A high-tech digital representation of Senegal's map integrated with glowing AI neural networks. The color palette incorporates the green, yellow, and red of the Senegalese flag in a subtle, professional way. In the foreground, a modern holographic interface shows a Senegalese national identity card being verified by AI. The background features a stylized silhouette of the Monument de la Renaissance Africaine in Dakar with digital data streams. Futuristic, clean, and culturally relevant.";
+        const variations = [
+          "high-tech digital representation",
+          "modern holographic visualization",
+          "futuristic artistic render",
+          "clean technological concept"
+        ];
+        const randomVariation = variations[Math.floor(Math.random() * variations.length)];
+        const prompt = `A ${randomVariation} of Senegal's map integrated with glowing AI neural networks. The color palette incorporates the green, yellow, and red of the Senegalese flag in a subtle, professional way. In the foreground, a modern holographic interface shows a Senegalese national identity card being verified by AI. The background features a stylized silhouette of the Monument de la Renaissance Africaine in Dakar with digital data streams. Futuristic, clean, and culturally relevant. Seed: ${Math.random()}`;
         const img = await generateImage(prompt);
         setAiImage2(img);
       } catch (error) {

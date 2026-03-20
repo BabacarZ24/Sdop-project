@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Search, LogIn, Menu, X } from "lucide-react";
+import { Search, Mail, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "../lib/utils";
 
@@ -14,7 +14,12 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100"
+    >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <a href="#accueil" className="flex items-center gap-1 group">
@@ -42,10 +47,10 @@ export default function Navbar() {
 
         {/* Right Action */}
         <div className="hidden md:block">
-          <button className="btn-primary text-sm px-8">
-            <LogIn className="w-4 h-4" />
-            Connexion
-          </button>
+          <a href="#contact" className="btn-primary text-sm px-8">
+            <Mail className="w-4 h-4" />
+            Contact us
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -74,12 +79,16 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <button className="btn-primary w-full">
-            <LogIn className="w-4 h-4" />
-            Connexion
-          </button>
+          <a 
+            href="#contact" 
+            onClick={() => setIsOpen(false)}
+            className="btn-primary w-full"
+          >
+            <Mail className="w-4 h-4" />
+            Contact us
+          </a>
         </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 }

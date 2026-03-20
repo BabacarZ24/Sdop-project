@@ -35,14 +35,23 @@ export default function Services() {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.03, translateY: -5 }}
-              className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
+              transition={{ 
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{ 
+                scale: 1.05, 
+                translateY: -10,
+                rotateZ: index % 2 === 0 ? 1 : -1
+              }}
+              className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-2xl transition-all group relative overflow-hidden"
             >
-              <div className={`w-14 h-14 rounded-2xl ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+              <div className="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className={`w-14 h-14 rounded-2xl ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 transition-transform`}>
                 <service.icon className="w-7 h-7" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-4">{service.title}</h3>

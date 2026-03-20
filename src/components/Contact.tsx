@@ -15,7 +15,12 @@ export default function Contact() {
     <section id="contact" className="section-padding bg-slate-50/50">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-primary">Contactez-nous</h2>
             <p className="text-slate-600 text-lg leading-relaxed">
               Vous avez des questions sur nos services ou vous souhaitez un partenariat ? 
@@ -25,11 +30,11 @@ export default function Contact() {
               <p className="font-semibold text-primary">Email</p>
               <p className="text-slate-600">sdopservice@gmail.com</p>
             </div>
-          </div>
+          </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-100"
           >
@@ -70,10 +75,15 @@ export default function Contact() {
                   placeholder="Comment pouvons-nous vous aider ?"
                 />
               </div>
-              <button type="submit" className="btn-primary w-full py-4">
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit" 
+                className="btn-primary w-full py-4"
+              >
                 Envoyer le message
                 <Send className="w-4 h-4" />
-              </button>
+              </motion.button>
             </form>
           </motion.div>
         </div>
